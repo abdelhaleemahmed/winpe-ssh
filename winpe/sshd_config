@@ -1,0 +1,25 @@
+# Minimal sshd_config for a Windows PE recovery environment.
+#
+# Deliberately small. The stock Win32-OpenSSH file is written for an installed
+# Windows with %ProgramData% expanded by its installer and a Match block that
+# sends administrators' keys to a shared file; none of that applies to a RAM
+# disk that exists for twenty minutes.
+#
+# Password authentication is on because WinPE has no user profile to put an
+# authorized_keys file in that survives a reboot -- the account is created by
+# startnet.cmd on each boot. The password is in startnet.cmd, in the lab
+# archive, and on the screen: this is a lab recovery environment reachable
+# only through a host port-forward, not something to copy onto a network.
+
+Port 22
+AddressFamily any
+ListenAddress 0.0.0.0
+
+PasswordAuthentication yes
+PubkeyAuthentication yes
+PermitEmptyPasswords no
+StrictModes no
+
+LogLevel DEBUG3
+
+Subsystem sftp sftp-server.exe

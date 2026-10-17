@@ -1,0 +1,7 @@
+# Built binaries -- build them from source, do not ship them.
+*.exe
+
+# Image build leftovers
+*.iso
+mount/
+media/
